@@ -1,0 +1,2526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Switches</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .switch {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 0.5rem;
+        }
+        .switch::before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background-color: white;
+            border-radius: 9999px;
+            transition: transform 0.3s;
+        }
+        .switch.on {
+            background-color: #4ade80;
+        }
+        .switch.on::before {
+            transform: translateX(20px);
+        }
+        .switch-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #333;    
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div id="memory" class="grid grid-cols-1 gap-4 p-6 bg-white shadow-lg rounded-lg">
+        <h2 class="text-center text-2xl font-bold mb-4">Memory</h2>
+        <h2 class="text-center text-1xl">Make all squares color green!</h3>
+        <div class="relative w-128 h-20">
+            <div class="absolute top-0 left-0 w-16 h-16 bg-green-500 rounded-lg"></div>
+            <div class="absolute top-0 left-20 w-16 h-16 bg-green-500 rounded-lg"></div>
+            <div class="absolute top-0 left-40 w-16 h-16 bg-green-500 rounded-lg"></div>
+            <div class="absolute top-0 left-60 w-16 h-16 bg-green-500 rounded-lg"></div>
+            <div class="absolute top-0 left-80 w-16 h-16 bg-green-500 rounded-lg"></div>
+            <div id ="box-0" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-1" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-2" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-3" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-4" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-5" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-6" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-7" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-8" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-9" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-10" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-11" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-12" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-13" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-14" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-15" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-16" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-17" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-18" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-19" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-20" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-21" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-22" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-23" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-24" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-25" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-26" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-27" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-28" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-29" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-30" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-31" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-32" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-33" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-34" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-35" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-36" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-37" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-38" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-39" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-40" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-41" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-42" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-43" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-44" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-45" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-46" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-47" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-48" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-49" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-50" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-51" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-52" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-53" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-54" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-55" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-56" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-57" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-58" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-59" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-60" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-61" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-62" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-63" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-64" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-65" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-66" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-67" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-68" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-69" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-70" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-71" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-72" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-73" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-74" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-75" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-76" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-77" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-78" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-79" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-80" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-81" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-82" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-83" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-84" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-85" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-86" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-87" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-88" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-89" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-90" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-91" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-92" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-93" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-94" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-95" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-96" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-97" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-98" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-99" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-100" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-101" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-102" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-103" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-104" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-105" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-106" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-107" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-108" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-109" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-110" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-111" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-112" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-113" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-114" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-115" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-116" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-117" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-118" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-119" class="hidden absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-120" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-121" class="hidden absolute top-0 left-40 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-122" class="hidden absolute top-0 left-20 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-123" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-124" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-125" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-126" class="hidden absolute top-0 left-80 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+            <div id ="box-127" class="hidden absolute top-0 left-60 w-16 h-16 bg-red-500 rounded-lg"></div>
+
+          </div>
+        <div class="grid grid-cols-4 gap-4">
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">0</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="0-0" class="switch" data-byte="0" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="0-1" class="switch" data-byte="0" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="0-2" class="switch" data-byte="0" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="0-3" class="switch" data-byte="0" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="0-4" class="switch" data-byte="0" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="0-5" class="switch" data-byte="0" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="0-6" class="switch" data-byte="0" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="0-7" class="switch" data-byte="0" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">1</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="1-0" class="switch" data-byte="1" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="1-1" class="switch" data-byte="1" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="1-2" class="switch" data-byte="1" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="1-3" class="switch" data-byte="1" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="1-4" class="switch" data-byte="1" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="1-5" class="switch" data-byte="1" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="1-6" class="switch" data-byte="1" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="1-7" class="switch" data-byte="1" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">2</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="2-0" class="switch" data-byte="2" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="2-1" class="switch" data-byte="2" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="2-2" class="switch" data-byte="2" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="2-3" class="switch" data-byte="2" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="2-4" class="switch" data-byte="2" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="2-5" class="switch" data-byte="2" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="2-6" class="switch" data-byte="2" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="2-7" class="switch" data-byte="2" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">3</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="3-0" class="switch" data-byte="3" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="3-1" class="switch" data-byte="3" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="3-2" class="switch" data-byte="3" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="3-3" class="switch" data-byte="3" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="3-4" class="switch" data-byte="3" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="3-5" class="switch" data-byte="3" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="3-6" class="switch" data-byte="3" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="3-7" class="switch" data-byte="3" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">4</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="4-0" class="switch" data-byte="4" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="4-1" class="switch" data-byte="4" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="4-2" class="switch" data-byte="4" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="4-3" class="switch" data-byte="4" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="4-4" class="switch" data-byte="4" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="4-5" class="switch" data-byte="4" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="4-6" class="switch" data-byte="4" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="4-7" class="switch" data-byte="4" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">5</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="5-0" class="switch" data-byte="5" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="5-1" class="switch" data-byte="5" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="5-2" class="switch" data-byte="5" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="5-3" class="switch" data-byte="5" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="5-4" class="switch" data-byte="5" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="5-5" class="switch" data-byte="5" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="5-6" class="switch" data-byte="5" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="5-7" class="switch" data-byte="5" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">6</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="6-0" class="switch" data-byte="6" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="6-1" class="switch" data-byte="6" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="6-2" class="switch" data-byte="6" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="6-3" class="switch" data-byte="6" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="6-4" class="switch" data-byte="6" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="6-5" class="switch" data-byte="6" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="6-6" class="switch" data-byte="6" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="6-7" class="switch" data-byte="6" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">7</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="7-0" class="switch" data-byte="7" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="7-1" class="switch" data-byte="7" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="7-2" class="switch" data-byte="7" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="7-3" class="switch" data-byte="7" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="7-4" class="switch" data-byte="7" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="7-5" class="switch" data-byte="7" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="7-6" class="switch" data-byte="7" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="7-7" class="switch" data-byte="7" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">8</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="8-0" class="switch" data-byte="8" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="8-1" class="switch" data-byte="8" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="8-2" class="switch" data-byte="8" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="8-3" class="switch" data-byte="8" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="8-4" class="switch" data-byte="8" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="8-5" class="switch" data-byte="8" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="8-6" class="switch" data-byte="8" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="8-7" class="switch" data-byte="8" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">9</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="9-0" class="switch" data-byte="9" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="9-1" class="switch" data-byte="9" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="9-2" class="switch" data-byte="9" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="9-3" class="switch" data-byte="9" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="9-4" class="switch" data-byte="9" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="9-5" class="switch" data-byte="9" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="9-6" class="switch" data-byte="9" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="9-7" class="switch" data-byte="9" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">10</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="10-0" class="switch" data-byte="10" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="10-1" class="switch" data-byte="10" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="10-2" class="switch" data-byte="10" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="10-3" class="switch" data-byte="10" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="10-4" class="switch" data-byte="10" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="10-5" class="switch" data-byte="10" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="10-6" class="switch" data-byte="10" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="10-7" class="switch" data-byte="10" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">11</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="11-0" class="switch" data-byte="11" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="11-1" class="switch" data-byte="11" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="11-2" class="switch" data-byte="11" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="11-3" class="switch" data-byte="11" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="11-4" class="switch" data-byte="11" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="11-5" class="switch" data-byte="11" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="11-6" class="switch" data-byte="11" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="11-7" class="switch" data-byte="11" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">12</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="12-0" class="switch" data-byte="12" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="12-1" class="switch" data-byte="12" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="12-2" class="switch" data-byte="12" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="12-3" class="switch" data-byte="12" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="12-4" class="switch" data-byte="12" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="12-5" class="switch" data-byte="12" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="12-6" class="switch" data-byte="12" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="12-7" class="switch" data-byte="12" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">13</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="13-0" class="switch" data-byte="13" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="13-1" class="switch" data-byte="13" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="13-2" class="switch" data-byte="13" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="13-3" class="switch" data-byte="13" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="13-4" class="switch" data-byte="13" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="13-5" class="switch" data-byte="13" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="13-6" class="switch" data-byte="13" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="13-7" class="switch" data-byte="13" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">14</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="14-0" class="switch" data-byte="14" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="14-1" class="switch" data-byte="14" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="14-2" class="switch" data-byte="14" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="14-3" class="switch" data-byte="14" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="14-4" class="switch" data-byte="14" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="14-5" class="switch" data-byte="14" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="14-6" class="switch" data-byte="14" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="14-7" class="switch" data-byte="14" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="flex flex-col items-center p-4 border rounded-md bg-gray-50 space-y-4">
+                <span class="text-gray-700 font-medium mb-2">Byte <span class="byte-number">15</span></span>
+                <div class="flex flex-col space-y-6">
+
+
+                    <div onclick="checkConfiguration()" id="15-0" class="switch" data-byte="15" data-bit="0">
+                        <span class="switch-number">0</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="15-1" class="switch" data-byte="15" data-bit="1">
+                        <span class="switch-number">1</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="15-2" class="switch" data-byte="15" data-bit="2">
+                        <span class="switch-number">2</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="15-3" class="switch" data-byte="15" data-bit="3">
+                        <span class="switch-number">3</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="15-4" class="switch" data-byte="15" data-bit="4">
+                        <span class="switch-number">4</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="15-5" class="switch" data-byte="15" data-bit="5">
+                        <span class="switch-number">5</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="15-6" class="switch" data-byte="15" data-bit="6">
+                        <span class="switch-number">6</span>
+                    </div>
+
+                    <div onclick="checkConfiguration()" id="15-7" class="switch" data-byte="15" data-bit="7">
+                        <span class="switch-number">7</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="message" class="text-center text-lg font-semibold text-green-600 mt-4 hidden">Configuration is correct!</div>
+    </div>
+
+    <script>
+
+        async function checkConfiguration() {
+            conf_0_0();
+            conf_0_1();
+            conf_0_2();
+            conf_0_3();
+            conf_0_4();
+            conf_0_5();
+            conf_0_6();
+            conf_0_7();
+            conf_1_0();
+            conf_1_1();
+            conf_1_2();
+            conf_1_3();
+            conf_1_4();
+            conf_1_5();
+            conf_1_6();
+            conf_1_7();
+            conf_2_0();
+            conf_2_1();
+            conf_2_2();
+            conf_2_3();
+            conf_2_4();
+            conf_2_5();
+            conf_2_6();
+            conf_2_7();
+            conf_3_0();
+            conf_3_1();
+            conf_3_2();
+            conf_3_3();
+            conf_3_4();
+            conf_3_5();
+            conf_3_6();
+            conf_3_7();
+            conf_4_0();
+            conf_4_1();
+            conf_4_2();
+            conf_4_3();
+            conf_4_4();
+            conf_4_5();
+            conf_4_6();
+            conf_4_7();
+            conf_5_0();
+            conf_5_1();
+            conf_5_2();
+            conf_5_3();
+            conf_5_4();
+            conf_5_5();
+            conf_5_6();
+            conf_5_7();
+            conf_6_0();
+            conf_6_1();
+            conf_6_2();
+            conf_6_3();
+            conf_6_4();
+            conf_6_5();
+            conf_6_6();
+            conf_6_7();
+            conf_7_0();
+            conf_7_1();
+            conf_7_2();
+            conf_7_3();
+            conf_7_4();
+            conf_7_5();
+            conf_7_6();
+            conf_7_7();
+            conf_8_0();
+            conf_8_1();
+            conf_8_2();
+            conf_8_3();
+            conf_8_4();
+            conf_8_5();
+            conf_8_6();
+            conf_8_7();
+            conf_9_0();
+            conf_9_1();
+            conf_9_2();
+            conf_9_3();
+            conf_9_4();
+            conf_9_5();
+            conf_9_6();
+            conf_9_7();
+            conf_10_0();
+            conf_10_1();
+            conf_10_2();
+            conf_10_3();
+            conf_10_4();
+            conf_10_5();
+            conf_10_6();
+            conf_10_7();
+            conf_11_0();
+            conf_11_1();
+            conf_11_2();
+            conf_11_3();
+            conf_11_4();
+            conf_11_5();
+            conf_11_6();
+            conf_11_7();
+            conf_12_0();
+            conf_12_1();
+            conf_12_2();
+            conf_12_3();
+            conf_12_4();
+            conf_12_5();
+            conf_12_6();
+            conf_12_7();
+            conf_13_0();
+            conf_13_1();
+            conf_13_2();
+            conf_13_3();
+            conf_13_4();
+            conf_13_5();
+            conf_13_6();
+            conf_13_7();
+            conf_14_0();
+            conf_14_1();
+            conf_14_2();
+            conf_14_3();
+            conf_14_4();
+            conf_14_5();
+            conf_14_6();
+            conf_14_7();
+            conf_15_0();
+            conf_15_1();
+            conf_15_2();
+            conf_15_3();
+            conf_15_4();
+            conf_15_5();
+            conf_15_6();
+            conf_15_7();
+
+            
+        }
+        checkConfiguration();
+
+        async function conf_0_0() {
+            bit_container = document.getElementById("0-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-58').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-58').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_0_1() {
+            bit_container = document.getElementById("0-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-43').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-43').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_0_2() {
+            bit_container = document.getElementById("0-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-33').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-33').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_0_3() {
+            bit_container = document.getElementById("0-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-60').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-60').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_0_4() {
+            bit_container = document.getElementById("0-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-77').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-77').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_0_5() {
+            bit_container = document.getElementById("0-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-50').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-50').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_0_6() {
+            bit_container = document.getElementById("0-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-42').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-42').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_0_7() {
+            bit_container = document.getElementById("0-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-86').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-86').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_1_0() {
+            bit_container = document.getElementById("1-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-72').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-72').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_1_1() {
+            bit_container = document.getElementById("1-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-81').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-81').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_1_2() {
+            bit_container = document.getElementById("1-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-79').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-79').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_1_3() {
+            bit_container = document.getElementById("1-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-107').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-107').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_1_4() {
+            bit_container = document.getElementById("1-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-4').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-4').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_1_5() {
+            bit_container = document.getElementById("1-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-89').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-89').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_1_6() {
+            bit_container = document.getElementById("1-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-31').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-31').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_1_7() {
+            bit_container = document.getElementById("1-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-105').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-105').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_2_0() {
+            bit_container = document.getElementById("2-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-32').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-32').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_2_1() {
+            bit_container = document.getElementById("2-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-91').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-91').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_2_2() {
+            bit_container = document.getElementById("2-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-120').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-120').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_2_3() {
+            bit_container = document.getElementById("2-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-11').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-11').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_2_4() {
+            bit_container = document.getElementById("2-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-126').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-126').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_2_5() {
+            bit_container = document.getElementById("2-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-26').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-26').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_2_6() {
+            bit_container = document.getElementById("2-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-115').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-115').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_2_7() {
+            bit_container = document.getElementById("2-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-62').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-62').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_3_0() {
+            bit_container = document.getElementById("3-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-6').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-6').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_3_1() {
+            bit_container = document.getElementById("3-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-108').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-108').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_3_2() {
+            bit_container = document.getElementById("3-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-0').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-0').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_3_3() {
+            bit_container = document.getElementById("3-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-13').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-13').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_3_4() {
+            bit_container = document.getElementById("3-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-70').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-70').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_3_5() {
+            bit_container = document.getElementById("3-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-103').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-103').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_3_6() {
+            bit_container = document.getElementById("3-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-69').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-69').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_3_7() {
+            bit_container = document.getElementById("3-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-112').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-112').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_4_0() {
+            bit_container = document.getElementById("4-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-40').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-40').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_4_1() {
+            bit_container = document.getElementById("4-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-46').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-46').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_4_2() {
+            bit_container = document.getElementById("4-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-68').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-68').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_4_3() {
+            bit_container = document.getElementById("4-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-10').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-10').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_4_4() {
+            bit_container = document.getElementById("4-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-123').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-123').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_4_5() {
+            bit_container = document.getElementById("4-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-74').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-74').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_4_6() {
+            bit_container = document.getElementById("4-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-38').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-38').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_4_7() {
+            bit_container = document.getElementById("4-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-54').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-54').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_5_0() {
+            bit_container = document.getElementById("5-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-5').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-5').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_5_1() {
+            bit_container = document.getElementById("5-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-34').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-34').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_5_2() {
+            bit_container = document.getElementById("5-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-119').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-119').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_5_3() {
+            bit_container = document.getElementById("5-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-30').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-30').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_5_4() {
+            bit_container = document.getElementById("5-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-44').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-44').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_5_5() {
+            bit_container = document.getElementById("5-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-7').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-7').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_5_6() {
+            bit_container = document.getElementById("5-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-29').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-29').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_5_7() {
+            bit_container = document.getElementById("5-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-85').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-85').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_6_0() {
+            bit_container = document.getElementById("6-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-24').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-24').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_6_1() {
+            bit_container = document.getElementById("6-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-82').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-82').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_6_2() {
+            bit_container = document.getElementById("6-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-39').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-39').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_6_3() {
+            bit_container = document.getElementById("6-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-109').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-109').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_6_4() {
+            bit_container = document.getElementById("6-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-19').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-19').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_6_5() {
+            bit_container = document.getElementById("6-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-88').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-88').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_6_6() {
+            bit_container = document.getElementById("6-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-57').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-57').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_6_7() {
+            bit_container = document.getElementById("6-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-15').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-15').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_7_0() {
+            bit_container = document.getElementById("7-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-67').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-67').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_7_1() {
+            bit_container = document.getElementById("7-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-8').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-8').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_7_2() {
+            bit_container = document.getElementById("7-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-106').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-106').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_7_3() {
+            bit_container = document.getElementById("7-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-95').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-95').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_7_4() {
+            bit_container = document.getElementById("7-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-93').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-93').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_7_5() {
+            bit_container = document.getElementById("7-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-45').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-45').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_7_6() {
+            bit_container = document.getElementById("7-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-51').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-51').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_7_7() {
+            bit_container = document.getElementById("7-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-98').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-98').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_8_0() {
+            bit_container = document.getElementById("8-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-48').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-48').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_8_1() {
+            bit_container = document.getElementById("8-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-56').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-56').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_8_2() {
+            bit_container = document.getElementById("8-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-110').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-110').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_8_3() {
+            bit_container = document.getElementById("8-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-52').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-52').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_8_4() {
+            bit_container = document.getElementById("8-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-28').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-28').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_8_5() {
+            bit_container = document.getElementById("8-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-73').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-73').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_8_6() {
+            bit_container = document.getElementById("8-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-53').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-53').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_8_7() {
+            bit_container = document.getElementById("8-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-36').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-36').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_9_0() {
+            bit_container = document.getElementById("9-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-104').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-104').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_9_1() {
+            bit_container = document.getElementById("9-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-61').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-61').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_9_2() {
+            bit_container = document.getElementById("9-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-118').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-118').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_9_3() {
+            bit_container = document.getElementById("9-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-84').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-84').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_9_4() {
+            bit_container = document.getElementById("9-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-94').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-94').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_9_5() {
+            bit_container = document.getElementById("9-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-113').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-113').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_9_6() {
+            bit_container = document.getElementById("9-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-80').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-80').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_9_7() {
+            bit_container = document.getElementById("9-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-21').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-21').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_10_0() {
+            bit_container = document.getElementById("10-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-100').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-100').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_10_1() {
+            bit_container = document.getElementById("10-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-125').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-125').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_10_2() {
+            bit_container = document.getElementById("10-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-47').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-47').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_10_3() {
+            bit_container = document.getElementById("10-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-59').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-59').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_10_4() {
+            bit_container = document.getElementById("10-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-17').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-17').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_10_5() {
+            bit_container = document.getElementById("10-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-64').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-64').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_10_6() {
+            bit_container = document.getElementById("10-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-97').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-97').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_10_7() {
+            bit_container = document.getElementById("10-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-121').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-121').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_11_0() {
+            bit_container = document.getElementById("11-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-92').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-92').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_11_1() {
+            bit_container = document.getElementById("11-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-23').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-23').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_11_2() {
+            bit_container = document.getElementById("11-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-37').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-37').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_11_3() {
+            bit_container = document.getElementById("11-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-116').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-116').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_11_4() {
+            bit_container = document.getElementById("11-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-12').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-12').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_11_5() {
+            bit_container = document.getElementById("11-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-27').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-27').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_11_6() {
+            bit_container = document.getElementById("11-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-22').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-22').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_11_7() {
+            bit_container = document.getElementById("11-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-99').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-99').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_12_0() {
+            bit_container = document.getElementById("12-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-63').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-63').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_12_1() {
+            bit_container = document.getElementById("12-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-65').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-65').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_12_2() {
+            bit_container = document.getElementById("12-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-75').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-75').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_12_3() {
+            bit_container = document.getElementById("12-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-55').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-55').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_12_4() {
+            bit_container = document.getElementById("12-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-2').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-2').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_12_5() {
+            bit_container = document.getElementById("12-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-102').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-102').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_12_6() {
+            bit_container = document.getElementById("12-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-16').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-16').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_12_7() {
+            bit_container = document.getElementById("12-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-114').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-114').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_13_0() {
+            bit_container = document.getElementById("13-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-49').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-49').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_13_1() {
+            bit_container = document.getElementById("13-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-14').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-14').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_13_2() {
+            bit_container = document.getElementById("13-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-18').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-18').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_13_3() {
+            bit_container = document.getElementById("13-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-35').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-35').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_13_4() {
+            bit_container = document.getElementById("13-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-76').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-76').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_13_5() {
+            bit_container = document.getElementById("13-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-124').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-124').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_13_6() {
+            bit_container = document.getElementById("13-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-101').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-101').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_13_7() {
+            bit_container = document.getElementById("13-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-122').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-122').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_14_0() {
+            bit_container = document.getElementById("14-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-83').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-83').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_14_1() {
+            bit_container = document.getElementById("14-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-96').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-96').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_14_2() {
+            bit_container = document.getElementById("14-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-3').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-3').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_14_3() {
+            bit_container = document.getElementById("14-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-41').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-41').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_14_4() {
+            bit_container = document.getElementById("14-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-20').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-20').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_14_5() {
+            bit_container = document.getElementById("14-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-90').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-90').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_14_6() {
+            bit_container = document.getElementById("14-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-9').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-9').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_14_7() {
+            bit_container = document.getElementById("14-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-71').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-71').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_15_0() {
+            bit_container = document.getElementById("15-0")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-1').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-1').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_15_1() {
+            bit_container = document.getElementById("15-1")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-78').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-78').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_15_2() {
+            bit_container = document.getElementById("15-2")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-127').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-127').classList.toggle("hidden", 1);
+            }
+        }
+
+        async function conf_15_3() {
+            bit_container = document.getElementById("15-3")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-117').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-117').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_15_4() {
+            bit_container = document.getElementById("15-4")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-111').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-111').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_15_5() {
+            bit_container = document.getElementById("15-5")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-87').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-87').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_15_6() {
+            bit_container = document.getElementById("15-6")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-25').classList.toggle("hidden", 1);
+            }else {
+                document.getElementById('box-25').classList.toggle("hidden", 0);
+            }
+        }
+
+        async function conf_15_7() {
+            bit_container = document.getElementById("15-7")
+            const isOn = bit_container.classList.contains("on");
+
+            if(isOn){
+                document.getElementById('box-66').classList.toggle("hidden", 0);
+            }else {
+                document.getElementById('box-66').classList.toggle("hidden", 1);
+            }
+        }
+        
+        const memoryContainer = document.querySelector("#memory .grid");
+        memoryContainer.querySelectorAll(".switch").forEach((switchEl, bit) => {
+            switchEl.addEventListener("click", () => {
+                switchEl.classList.toggle("on");
+                checkConfiguration();
+            });
+        });
+    </script>
+</body>
+</html>
