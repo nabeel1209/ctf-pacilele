@@ -1,0 +1,1 @@
+__dict__.items() if False else dict(filter(lambda item: 'FAKE' not in str(item[1]), secret.__dict__.items()))

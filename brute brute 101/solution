@@ -1,0 +1,1 @@
+fcrackzip -D -p "brute brute 101/rockyou.txt" -v -u "brute brute 101/secret.zip" 

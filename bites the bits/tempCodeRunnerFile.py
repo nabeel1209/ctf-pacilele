@@ -1,1 +1,0 @@
-bytes_to_long(flag.encode())
